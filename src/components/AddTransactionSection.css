@@ -1,0 +1,168 @@
+.add-transaction {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(19, 14, 175, 0.05);
+}
+
+.add-btn {
+  background-color: #130eaf;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #0e0b8a;
+}
+
+.form-container {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-container input {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.save-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #e55b00;
+}
+
+.transaction-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-card {
+  background-color: #f9f9ff;
+  border-radius: 14px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.transaction-card:hover {
+  background-color: #eef0ff;
+}
+
+.info h4 {
+  color: #130eaf;
+  margin: 0 0 4px;
+}
+
+.amount {
+  font-weight: 600;
+  color: #333;
+}
+
+.category {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  color: #130eaf;
+}
+
+.delete-btn {
+  color: #ff6600;
+}
+
+.edit-btn:hover {
+  transform: scale(1.1);
+}
+
+.delete-btn:hover {
+  transform: scale(1.1);
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+.transaction-card .actions button {
+  background: none; 
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction-card .actions button svg {
+  color: red; 
+  font-size: 18px; 
+  transition: transform 0.2s;
+}
+
+.transaction-card .actions button:hover svg {
+  transform: scale(1.2);
+}
+
+.transaction-card .actions .edit-btn {
+  background: none; 
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction-card .actions .edit-btn svg {
+  color: green;
+  font-size: 18px; 
+  transition: transform 0.2s;
+}
+
+.transaction-card .actions .edit-btn:hover svg {
+  transform: scale(1.2);
+}

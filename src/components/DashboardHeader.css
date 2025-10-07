@@ -1,0 +1,73 @@
+/* DashboardHeader.css*/
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.dashboard-header-left h2 {
+  color: #130eaf;
+  font-size: 20px;
+  margin: 0;
+}
+
+.dashboard-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.dashboard-header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #f4f6fb;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.search-icon {
+  color: #130eaf;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.notification-icon {
+  color: #130eaf;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #130eaf;
+  cursor: pointer;
+}

@@ -1,0 +1,70 @@
+/* DashboardCards.css */
+/* Overview statistic cards*/
+/* Colors:
+   Primary: #130EAF
+   Accent: #FF6600
+   Background: #FFFFFF
+*/
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  color: #ffffff;
+  background-color: #130eaf;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-details h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #333;
+}
+
+.card-details p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 5px 0 0 0;
+}
+
+/* Unique accent colors per card */
+.completed .card-icon {
+  background-color: #130eaf;
+}
+
+.progress .card-icon {
+  background-color: #ff6600;
+}
+
+.pending .card-icon {
+  background-color: #f0c808;
+}
+
+.projects .card-icon {
+  background-color: #7d3cff;
+}
