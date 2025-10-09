@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp, FaArrowDown, FaWallet } from "react-icons/fa";
 import "./DashboardAnalytics.css";
+import DashboardMain from './DashboardMain'
 
 const DashboardAnalytics = () => {
   // Local mock data — Gilbert please replace with Supabase query. I would send u the table schem in Supabase.
@@ -54,9 +55,7 @@ const DashboardAnalytics = () => {
       </div>
 
       <div className="chart-section">
-        <p style={{ color: "#555" }}>
-          Raven’s chart will appear here — showing income vs. expenses trend. replace with the real chart from Gilbert's section and style with the color codes in the css file if necessary.
-        </p>
+       <DashboardMain></DashboardMain>
       </div>
     </section>
   );

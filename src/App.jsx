@@ -11,6 +11,7 @@ import DashboardAnalytics from "./components/DashboardAnalytics";
 import RightPanel from "./components/RightPanel";
 import LandingPage from "./components/LandingPage";
 import AuthForm from "./components/AuthForm";
+
 import "./App.css";
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
           <DashboardCards />
           <AddTransactionSection />
           <DashboardAnalytics /> {/* Raven’s chart area */}
+          
         </main>
         <RightPanel />
       </div>

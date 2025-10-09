@@ -39,7 +39,7 @@ const LandingPage = ({ onGetStarted }) => {
       </section>
 
       <footer className="landing-footer">
-        <p>Made with Love💜 by Raven, Tasha, Gilbert, Marve</p>
+        <p>Made with Love💜 by Raven, Tasha, Gilbert, Marvel</p>
       </footer>
     </div>
   );
