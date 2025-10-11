@@ -1,10 +1,7 @@
-// Gilbert's File
-// Component: AddTransactionSection.jsx
-// Description: Add, edit, and delete transactions with confirmation dialogs. Intergrate the functionality with Supabase later.
-
 import React, { useState, useEffect } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import "./AddTransactionSection.css";
+import { supabase } from "../supabaseClient";
 
 const AddTransactionSection = () => {
   const [transactions, setTransactions] = useState([]);
@@ -17,28 +14,73 @@ const AddTransactionSection = () => {
   });
   const [editingId, setEditingId] = useState(null);
 
+  const fetchTransactions = async () => {
+    const { data, error } = await supabase
+      .from("transactions")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching transactions:", error);
+    } else {
+      setTransactions(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+
+    const subscription = supabase
+      .channel("transactions-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "transactions",
+        },
+        () => fetchTransactions()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
+  }, []);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleAddOrUpdateTransaction = (e) => {
+  const handleAddOrUpdateTransaction = async (e) => {
     e.preventDefault();
 
     if (editingId) {
-      // Update existing transaction
-      setTransactions(
-        transactions.map((t) =>
-          t.id === editingId ? { ...t, ...form } : t
-        )
-      );
-      setEditingId(null);
+      const { error } = await supabase
+        .from("transactions")
+        .update(form)
+        .eq("id", editingId);
+
+      if (!error) {
+        setEditingId(null);
+      } else {
+        console.error("Error updating transaction:", error);
+      }
     } else {
-      // Add new transaction
-      setTransactions([...transactions, { id: Date.now(), ...form }]);
+      const { error } = await supabase.from("transactions").insert([form]);
+
+      if (error) {
+        console.error("Error adding transaction:", error);
+      }
     }
 
-    // Reset form
-    setForm({ title: "", amount: "", type: "expense", category: "", note: "" });
+    setForm({
+      title: "",
+      amount: "",
+      type: "expense",
+      category: "",
+      note: "",
+    });
   };
 
   const handleEdit = (transaction) => {
@@ -52,14 +94,21 @@ const AddTransactionSection = () => {
     setEditingId(transaction.id);
   };
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this transaction?");
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this transaction?"
+    );
     if (confirmDelete) {
-      setTransactions(transactions.filter((t) => t.id !== id));
+      const { error } = await supabase
+        .from("transactions")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        console.error("Error deleting transaction:", error);
+      }
     }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <section className="add-transaction">
