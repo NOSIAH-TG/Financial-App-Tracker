@@ -14,8 +14,8 @@ const RightPanel = () => {
 
   const contributors = [
     { id: 1, name: "Marvel 🦋", role: "UI Designer" },
-    { id: 2, name: "Raven", role: "Bootstrap" },
-    { id: 3, name: "Gilbert", role: "Backend" },
+    { id: 2, name: "Raven ", role: "Backend" },
+    { id: 3, name: "Gilbert 🧑🏽‍💻", role: "Backend" },
     { id: 4, name: "Daisy", role: "Dev Ops" },
   ];
 

@@ -1,65 +1,200 @@
-// Section: Raven's section
-// Description: Displays the main finance dashboard area showing total balance,
-// income vs expenses chart, and recent transactions summary.
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./DashboardMain.css";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { Bar, Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+import { supabase } from "../supabaseClient";
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+);
 
 const DashboardMain = () => {
+  const [summary, setSummary] = useState({
+    totalIncome: 0,
+    totalExpense: 0,
+    balance: 0,
+  });
+
+  const [chartData, setChartData] = useState([]);
+  const [recentTransactions, setRecentTransactions] = useState([]);
+
+  const fetchData = async () => {
+    const { data, error } = await supabase
+      .from("transactions")
+      .select("amount, type, title, category, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching transactions:", error);
+      return;
+    }
+
+    const totalIncome = data
+      .filter((t) => t.type.toLowerCase() === "income")
+      .reduce((sum, t) => sum + Number(t.amount), 0);
+
+    const totalExpense = data
+      .filter((t) => t.type.toLowerCase() === "expense")
+      .reduce((sum, t) => sum + Number(t.amount), 0);
+
+    const balance = totalIncome - totalExpense;
+
+    setSummary({ totalIncome, totalExpense, balance });
+
+    const grouped = {};
+    data.forEach((t) => {
+      const month = new Date(t.created_at).toLocaleString("default", {
+        month: "short",
+        year: "numeric",
+      });
+
+      if (!grouped[month]) {
+        grouped[month] = { income: 0, expense: 0 };
+      }
+
+      if (t.type.toLowerCase() === "income") {
+        grouped[month].income += Number(t.amount);
+      } else {
+        grouped[month].expense += Number(t.amount);
+      }
+    });
+
+    const formattedChartData = Object.entries(grouped).map(
+      ([month, values]) => ({
+        month,
+        income: values.income,
+        expense: values.expense,
+      })
+    );
+
+    setChartData(formattedChartData);
+    setRecentTransactions(data.slice(0, 4));
+  };
+
+  useEffect(() => {
+    fetchData();
+
+    const subscription = supabase
+      .channel("dashboard-main")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "transactions" },
+        () => fetchData()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
+  }, []);
+
+  const labels = chartData.map((d) => d.month);
+  const incomeValues = chartData.map((d) => d.income);
+  const expenseValues = chartData.map((d) => d.expense);
+
+  const barChartConfig = {
+    labels,
+    datasets: [
+      {
+        label: "Income",
+        data: incomeValues,
+        backgroundColor: "#4CAF50",
+      },
+      {
+        label: "Expense",
+        data: expenseValues,
+        backgroundColor: "#F44336",
+      },
+    ],
+  };
+
+  const pieChartConfig = {
+    labels: ["Income", "Expense"],
+    datasets: [
+      {
+        data: [summary.totalIncome, summary.totalExpense],
+        backgroundColor: ["#4CAF50", "#F44336"],
+      },
+    ],
+  };
+
   return (
     <section className="dashboard-main">
       {/* Top Balance Overview */}
       <div className="balance-section">
         <h3 className="section-title">Account Overview</h3>
-
         <div className="balance-card">
           <h4>Total Balance</h4>
-          <h2 className="balance-amount">XAF 1,245,000</h2>
-
+          <h2 className="balance-amount">
+            XAF {summary.balance.toLocaleString()}
+          </h2>
           <div className="balance-stats">
             <p className="income">
-              <FaArrowUp /> Income: <span>XAF 870,000</span>
+              <FaArrowUp /> Income:{" "}
+              <span>XAF {summary.totalIncome.toLocaleString()}</span>
             </p>
             <p className="expense">
-              <FaArrowDown /> Expenses: <span>XAF 375,000</span>
+              <FaArrowDown /> Expenses:{" "}
+              <span>XAF {summary.totalExpense.toLocaleString()}</span>
             </p>
           </div>
         </div>
       </div>
 
-      {/*  Income vs Expense Chart (Placeholder for Raven) */}
+      {/* Bar Chart */}
       <div className="chart-section">
-        <h3 className="section-title">Income vs Expenses</h3>
-        <div className="chart-placeholder">
-          📊 Chart Placeholder
-        </div>
-        {/* TODO: Raven will integrate an actual chart here using Recharts or Chart.js */}
+        <h3 className="section-title">Income vs Expenses (Bar)</h3>
+        <Bar data={barChartConfig} />
+      </div>
+
+      {/* Pie Chart */}
+      <div className="chart-section">
+        <h3 className="section-title">Income vs Expense (Pie)</h3>
+        <Pie data={pieChartConfig} />
       </div>
 
       {/* Recent Transactions List */}
       <div className="transactions-section">
         <h3 className="section-title">Recent Transactions</h3>
         <div className="transactions-list">
-          <div className="transaction-item">
-            <p>Salary - Company Ltd</p>
-            <span className="income-text">+XAF 200,000</span>
-          </div>
-          <div className="transaction-item">
-            <p>Groceries</p>
-            <span className="expense-text">-XAF 45,000</span>
-          </div>
-          <div className="transaction-item">
-            <p>Freelance Project</p>
-            <span className="income-text">+XAF 120,000</span>
-          </div>
-          <div className="transaction-item">
-            <p>Transportation</p>
-            <span className="expense-text">-XAF 15,000</span>
-          </div>
+          {recentTransactions.length === 0 ? (
+            <p>No recent transactions found.</p>
+          ) : (
+            recentTransactions.map((t, index) => (
+              <div key={index} className="transaction-item">
+                <p>
+                  {t.title} {t.category ? `- ${t.category}` : ""}
+                </p>
+                <span
+                  className={
+                    t.type.toLowerCase() === "income"
+                      ? "income-text"
+                      : "expense-text"
+                  }
+                >
+                  {t.type.toLowerCase() === "income" ? "+" : "-"}XAF{" "}
+                  {Number(t.amount).toLocaleString()}
+                </span>
+              </div>
+            ))
+          )}
         </div>
-
-        {/* TODO: Raven will later fetch real transaction data from state or backend */}
       </div>
     </section>
   );

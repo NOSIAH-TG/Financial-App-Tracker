@@ -12,6 +12,7 @@ import RightPanel from "./components/RightPanel";
 import LandingPage from "./components/LandingPage";
 import AuthForm from "./components/AuthForm";
 import "./App.css";
+import DashboardMain from "./components/DashboardMain";
 
 const App = () => {
   const [session, setSession] = useState(null);
@@ -54,6 +55,7 @@ const App = () => {
           <DashboardCards />
           <AddTransactionSection />
           <DashboardAnalytics /> {/* Raven’s chart area */}
+          <DashboardMain />
         </main>
         <RightPanel />
       </div>
