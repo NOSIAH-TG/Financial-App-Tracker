@@ -109,12 +109,12 @@ const DashboardAnalytics = () => {
       {
         label: "Income",
         data: incomeValues,
-        backgroundColor: "#4CAF50",
+        backgroundColor: "#130eaf",
       },
       {
         label: "Expense",
         data: expenseValues,
-        backgroundColor: "#F44336",
+        backgroundColor: "#ff6600",
       },
     ],
   };
@@ -149,9 +149,10 @@ const DashboardAnalytics = () => {
         </div>
       </div>
 
+         <Bar data={barChartConfig} />
       <div className="chart-section">
-        <Bar data={barChartConfig} />
-      </div>
+     </div>
+    
     </section>
   );
 };

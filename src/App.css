@@ -1,5 +1,7 @@
 /* Please dont edit this */
-
+html {
+  scroll-behavior: smooth;
+}
 /* root app: sidebar + main-wrapper */
 .app {
   display: flex;

@@ -54,11 +54,11 @@
 }
 
 .income {
-  color: #0dbf4d;
+  color: #130eaf;
 }
 
 .expense {
-  color: #ff3d3d;
+  color: #ff6600;
 }
 
 /* Chart Placeholder */
@@ -106,11 +106,11 @@
 }
 
 .income-text {
-  color: #0dbf4d;
+  color: #130eaf;
   font-weight: 600;
 }
 
 .expense-text {
-  color: #ff3d3d;
+  color: #ff6600;
   font-weight: 600;
 }

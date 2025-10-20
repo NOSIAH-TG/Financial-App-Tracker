@@ -8,8 +8,10 @@ import { FaClipboardList, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
 const RightPanel = () => {
   const tasks = [
     { id: 1, text: "Review October Expenses", done: true },
+    {id: 4, text: "Get a new phone", done:true},
     { id: 2, text: "Add new income record", done: false },
-    { id: 3, text: "Prepare monthly report", done: false },
+    { id: 3, text: "Prepare monthly report", done: false }
+    
   ];
 
   const contributors = [
@@ -24,7 +26,7 @@ const RightPanel = () => {
       {/* Tasks Section */}
       <div className="panel-section">
         <h3>
-          <FaClipboardList className="icon" /> Tasks
+          <FaClipboardList className="icon" /> Projects
         </h3>
         <ul className="task-list">
           {tasks.map((task) => (
