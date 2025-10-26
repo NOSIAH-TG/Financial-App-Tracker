@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import { FaChartBar } from "react-icons/fa";
 import "./ReportSection.css"
 
 const ReportSection = () => {
@@ -55,7 +56,7 @@ const ReportSection = () => {
 
   return (
     <section className="report-section">
-      <h3 className="section-title">Monthly Report</h3>
+      <h3 className="section-title">Monthly Report <FaChartBar className="icon" /> </h3>
       <p className="section-subtitle">Overview for {new Date().toLocaleString("default", { month: "long" })}</p>
       <ul className="report-list">
         <li><strong>Total Income:</strong> <span>₣{summary.income}</span></li>

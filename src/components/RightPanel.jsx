@@ -1,22 +1,44 @@
-// Section: Right Panel — Tasks, Calendar & Top Contributors
-// Description: Displays the right-side dashboard panel with scrollable content. This is static and does not require editing.
-
-import React from "react";
+import React, { useState } from "react";
 import "./RightPanel.css";
-import { FaClipboardList, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
+import { FaClipboardList, FaCalendarAlt, FaUserCircle, FaTrash } from "react-icons/fa";
 
 const RightPanel = () => {
-  const tasks = [
+  const initialTasks = [
     { id: 1, text: "Review October Expenses", done: true },
-    {id: 4, text: "Get a new phone", done:true},
+    { id: 4, text: "Get a new phone", done: true },
     { id: 2, text: "Add new income record", done: false },
-    { id: 3, text: "Prepare monthly report", done: false }
-    
+    { id: 3, text: "Prepare monthly report", done: false },
   ];
+
+  const [tasks, setTasks] = useState(initialTasks);
+  const [newTask, setNewTask] = useState("");
+
+  const toggleTask = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, done: !task.done } : task
+      )
+    );
+  };
+
+  const addTask = () => {
+    if (newTask.trim() === "") return;
+    const newEntry = {
+      id: Date.now(),
+      text: newTask.trim(),
+      done: false,
+    };
+    setTasks((prev) => [newEntry, ...prev]);
+    setNewTask("");
+  };
+
+  const deleteTask = (id) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
 
   const contributors = [
     { id: 1, name: "Marvel 🦋", role: "UI Designer" },
-    { id: 2, name: "Raven ", role: "Backend" },
+    { id: 2, name: "Raven", role: "Backend" },
     { id: 3, name: "Gilbert 🧑🏽‍💻", role: "Backend" },
     { id: 4, name: "Daisy", role: "Dev Ops" },
   ];
@@ -28,11 +50,40 @@ const RightPanel = () => {
         <h3>
           <FaClipboardList className="icon" /> Projects
         </h3>
+
+        <div className="task-input">
+          <input
+            type="text"
+            placeholder="Add a new task..."
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addTask()}
+            aria-label="New task input"
+          />
+          <button onClick={addTask} aria-label="Add task">Add</button>
+        </div>
+
         <ul className="task-list">
           {tasks.map((task) => (
             <li key={task.id} className={task.done ? "done" : ""}>
-              <input type="checkbox" checked={task.done} readOnly />
-              <span>{task.text}</span>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={task.done}
+                  onChange={() => toggleTask(task.id)}
+                  aria-label={`Mark ${task.text} as ${
+                    task.done ? "incomplete" : "complete"
+                  }`}
+                />
+                <span>{task.text}</span>
+              </label>
+              <button
+                className="delete-task"
+                onClick={() => deleteTask(task.id)}
+                aria-label={`Delete ${task.text}`}
+              >
+                <FaTrash />
+              </button>
             </li>
           ))}
         </ul>

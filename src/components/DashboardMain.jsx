@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DashboardMain.css";
 import TrackSection from "./TrackSection";
-import ProjectSection from "./ProjectSection";
 import ReportSection from "./ReportSection";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { Bar, Pie } from "react-chartjs-2";
@@ -16,6 +15,7 @@ import {
 } from "chart.js";
 
 import { supabase } from "../supabaseClient";
+import AddProjectSection from "./AddProjectSection";
 
 // Register Chart.js components
 ChartJS.register(
@@ -203,7 +203,7 @@ const DashboardMain = () => {
     </section>
       <div>
         <section id="projects" >
-          <ProjectSection />
+          <AddProjectSection/>
         </section>
         
         <section id="track" >

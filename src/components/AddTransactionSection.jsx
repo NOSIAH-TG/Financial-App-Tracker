@@ -13,12 +13,19 @@ const AddTransactionSection = () => {
     note: "",
   });
   const [editingId, setEditingId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const fetchTransactions = async () => {
-    const { data, error } = await supabase
+  const fetchTransactions = async (category = "all") => {
+    let query = supabase
       .from("transactions")
       .select("*")
       .order("created_at", { ascending: false });
+
+    if (category !== "all") {
+      query = query.eq("category", category);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       console.error("Error fetching transactions:", error);
@@ -28,7 +35,7 @@ const AddTransactionSection = () => {
   };
 
   useEffect(() => {
-    fetchTransactions();
+    fetchTransactions(selectedCategory);
 
     const subscription = supabase
       .channel("transactions-realtime")
@@ -39,14 +46,14 @@ const AddTransactionSection = () => {
           schema: "public",
           table: "transactions",
         },
-        () => fetchTransactions()
+        () => fetchTransactions(selectedCategory)
       )
       .subscribe();
 
     return () => {
       supabase.removeChannel(subscription);
     };
-  }, []);
+  }, [selectedCategory]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -151,6 +158,27 @@ const AddTransactionSection = () => {
           {editingId ? "Update Transaction" : "Save Transaction"}
         </button>
       </form>
+
+      {/* ✅ Category Filter Dropdown */}
+      <div className="category-filter">
+        <label htmlFor="category-select">Filter by Category:</label>
+        <select
+          id="category-select"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="all">All</option>
+          <option value="health">Health</option>
+          <option value="project">Project</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="utilities">Utilities</option>
+          <option value="salary">Salary</option>
+          <option value="freelance">Freelance</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
 
       <div className="transaction-list">
         <h4>Recent Transactions</h4>

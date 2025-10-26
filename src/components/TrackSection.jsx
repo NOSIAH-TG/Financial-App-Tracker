@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import "./TrackSection.css";
+import {
+  FaChartPie,
+  FaListAlt,
+  FaProjectDiagram,
+  FaChartBar,
+  FaSignOutAlt,
+  FaCog,
+} from "react-icons/fa";
 
 const TrackSection = () => {
   const [topCategory, setTopCategory] = useState("");
@@ -60,7 +68,7 @@ const TrackSection = () => {
 
   return (
     <section className="track-section">
-      <h3 className="section-title">Spending Insights</h3>
+      <h3 className="section-title">Spending Insights < FaListAlt /></h3>
       <p className="section-subtitle">Monitor habits and recurring patterns.</p>
       <ul className="track-list">
         <li><strong>Top Category:</strong> {topCategory}</li>

@@ -166,3 +166,21 @@
 .transaction-card .actions .edit-btn:hover svg {
   transform: scale(1.2);
 }
+.category-filter {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-filter label {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.category-filter select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
