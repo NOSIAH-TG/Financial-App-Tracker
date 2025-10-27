@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DashboardMain.css";
+import TrackSection from "./TrackSection";
+import ReportSection from "./ReportSection";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { Bar, Pie } from "react-chartjs-2";
 import {
@@ -13,6 +15,7 @@ import {
 } from "chart.js";
 
 import { supabase } from "../supabaseClient";
+import AddProjectSection from "./AddProjectSection";
 
 // Register Chart.js components
 ChartJS.register(
@@ -114,12 +117,12 @@ const DashboardMain = () => {
       {
         label: "Income",
         data: incomeValues,
-        backgroundColor: "#4CAF50",
+        backgroundColor: "#130eaf",
       },
       {
         label: "Expense",
         data: expenseValues,
-        backgroundColor: "#F44336",
+        backgroundColor: "#ff6600",
       },
     ],
   };
@@ -129,12 +132,13 @@ const DashboardMain = () => {
     datasets: [
       {
         data: [summary.totalIncome, summary.totalExpense],
-        backgroundColor: ["#4CAF50", "#F44336"],
+        backgroundColor: ["#130eaf", "#ff6600"],
       },
     ],
   };
 
   return (
+    <div>
     <section className="dashboard-main">
       {/* Top Balance Overview */}
       <div className="balance-section">
@@ -197,6 +201,20 @@ const DashboardMain = () => {
         </div>
       </div>
     </section>
+      <div>
+        <section id="projects" >
+          <AddProjectSection/>
+        </section>
+        
+        <section id="track" >
+          <TrackSection />
+        </section>
+
+        <section id="reports" >
+          <ReportSection />
+        </section>
+      </div>
+    </div>
   );
 };
 

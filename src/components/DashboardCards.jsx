@@ -15,7 +15,7 @@ const DashboardCards = () => {
         </div>
         <div className="card-details">
           <h3>Completed</h3>
-          <p>4 Tasks</p>
+          <p>4 Projects</p>
         </div>
       </div>
 
@@ -26,7 +26,7 @@ const DashboardCards = () => {
         </div>
         <div className="card-details">
           <h3>In Progress</h3>
-          <p>5 Tasks</p>
+          <p>5 Projects</p>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ const DashboardCards = () => {
         </div>
         <div className="card-details">
           <h3>Pending</h3>
-          <p>* Tasks</p>
+          <p>* Projects</p>
         </div>
       </div>
 

@@ -25,7 +25,7 @@ const Sidebar = ({ onLogout }) => {
   return (
     <aside className="sidebar">
       <div className="logoSection">
-        <h2 className="logo">Taskify</h2>
+        <h2 className="logo">Buget Wise</h2>
       </div>
 
       <nav className="navLinks">
@@ -33,16 +33,16 @@ const Sidebar = ({ onLogout }) => {
           <FaChartPie className="icon" />
           <span>Dashboard</span>
         </a>
-        <a href="#" className="link">
+        <a href="#track" className="link">
           <FaListAlt className="icon" />
           <span>Track</span>
         </a>
-        <a href="#" className="link">
+        <a href="#projects" className="link">
           <FaProjectDiagram className="icon" />
           <span>Projects</span>
           <span className="badge">2</span>
         </a>
-        <a href="#" className="link">
+        <a href="#reports" className="link">
           <FaChartBar className="icon" />
           <span>Reports</span>
         </a>

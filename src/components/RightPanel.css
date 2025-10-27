@@ -107,3 +107,40 @@
   color: #555;
   font-size: 0.85rem;
 }
+
+.task-input {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.task-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.task-input button {
+  padding: 8px 12px;
+  background-color: #130eaf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-list .delete-task {
+  background: none;
+  border: none;
+  color: #ff6600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
