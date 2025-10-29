@@ -29,7 +29,7 @@ const Sidebar = ({ onLogout }) => {
       </div>
 
       <nav className="navLinks">
-        <a href="#" className="link active">
+        <a href="#dashboard" className="link active">
           <FaChartPie className="icon" />
           <span>Dashboard</span>
         </a>
@@ -49,14 +49,14 @@ const Sidebar = ({ onLogout }) => {
       </nav>
 
       <div className="bottomSection">
-        <a href="#" className="link" onClick={handleLogout}>
+        <button className="link" onClick={handleLogout}>
           <FaSignOutAlt className="icon" />
           <span>Logout</span>
-        </a>
-        <a href="#" className="link">
+        </button>
+        <button className="link">
           <FaCog className="icon" />
           <span>Settings</span>
-        </a>
+        </button>
       </div>
     </aside>
   );
