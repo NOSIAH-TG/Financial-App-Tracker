@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar";
 import DashboardHeader from "./components/DashboardHeader";
 import DashboardCards from "./components/DashboardCards";
 import AddTransactionSection from "./components/AddTransactionSection";
-import DashboardAnalytics from "./components/DashboardAnalytics"; 
+import DashboardAnalytics from "./components/DashboardAnalytics";
 import RightPanel from "./components/RightPanel";
 import LandingPage from "./components/LandingPage";
 import AuthForm from "./components/AuthForm";
@@ -17,6 +17,7 @@ import DashboardMain from "./components/DashboardMain";
 const App = () => {
   const [session, setSession] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
+  const [showPanels, setShowPanels] = useState(true); // controls sidebar + right panel
 
   useEffect(() => {
     const getSession = async () => {
@@ -34,6 +35,10 @@ const App = () => {
     return () => listener.subscription.unsubscribe();
   }, []);
 
+  const togglePanels = () => {
+    setShowPanels((prev) => !prev);
+  };
+
   if (!session) {
     return (
       <div className="landing-auth-wrapper">
@@ -49,15 +54,15 @@ const App = () => {
   return (
     <div className="app">
       <div className="main-wrapper">
-        <Sidebar />
+        {showPanels && <Sidebar />}
         <main className="main-content">
-          <DashboardHeader />
+          <DashboardHeader onTogglePanels={togglePanels} />
           <DashboardCards />
           <AddTransactionSection />
-          <DashboardAnalytics /> {/* Raven’s chart area */}
+          <DashboardAnalytics />
           <DashboardMain />
         </main>
-        <RightPanel />
+        {showPanels && <RightPanel />}
       </div>
     </div>
   );
