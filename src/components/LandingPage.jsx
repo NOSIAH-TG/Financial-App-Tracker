@@ -6,7 +6,7 @@ const LandingPage = ({ onGetStarted }) => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Taskify</h1>
+        <h1>BudgetWise</h1>
         <button className="get-started-btn" onClick={onGetStarted}>
           Get Started
         </button>
@@ -39,7 +39,7 @@ const LandingPage = ({ onGetStarted }) => {
       </section>
 
       <footer className="landing-footer">
-        <p>Made with Love💜 by Raven, Tasha, Gilbert, Marve</p>
+        <p>Made with Love💜 by Raven, Daizy, Gilbert, Marvel</p>
       </footer>
     </div>
   );

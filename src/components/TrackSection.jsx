@@ -14,7 +14,7 @@ const TrackSection = () => {
   const [topCategory, setTopCategory] = useState("");
   const [largestExpense, setLargestExpense] = useState(null);
   const [largestIncome, setLargestIncome] = useState(null);
-  const [tags, setTags] = useState([]);
+  
 
   useEffect(() => {
     const fetchTrackData = async () => {
