@@ -25,7 +25,7 @@ const Sidebar = ({ onLogout }) => {
   return (
     <aside className="sidebar">
       <div className="logoSection">
-        <h2 className="logo">Buget Wise</h2>
+        <h2 className="logo">BugetWise</h2>
       </div>
 
       <nav className="navLinks">
