@@ -53,14 +53,6 @@ const TrackSection = () => {
         { amount: 0 }
       );
       setLargestIncome(largestInc);
-
-      // Tags from notes
-      const tagSet = new Set();
-      data.forEach((t) => {
-        const matches = t.note?.match(/#\w+/g);
-        matches?.forEach((tag) => tagSet.add(tag));
-      });
-      setTags([...tagSet]);
     };
 
     fetchTrackData();

@@ -14,6 +14,7 @@ const DashboardHeader = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchRef = useRef(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && onSearch) {
@@ -46,63 +47,75 @@ const DashboardHeader = ({ onSearch }) => {
   }, []);
 
   return (
-    <header className="dashboard-header">
-      <div className="dashboard-header-left">
-        <h2 className="dashboard-greeting">Hi, Marvel👋</h2>
-        <p className="dashboard-subtitle">
-          Welcome back! Here’s your daily overview.
-        </p>
-      </div>
+<header className="dashboard-header">
+  <div className="dashboard-header-left">
+    <h2 className="dashboard-greeting">Hi, Marvel👋</h2>
+    <p className="dashboard-subtitle">
+      Welcome back! Here’s your daily overview.
+    </p>
+  </div>
 
-      <div className="dashboard-header-right">
-        <div className="search-bar" ref={searchRef}>
-          <FiSearch className="search-icon" onClick={() => setIsSearchOpen(!isSearchOpen)} />
-          <AnimatePresence>
-            {isSearchOpen && (
-              <motion.input
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                type="text"
-                placeholder="Search sections..."
-                className="search-input"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-            )}
-          </AnimatePresence>
+  {/* Hamburger Button */}
+  <button
+    className="hamburger-btn"
+    onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+    aria-label="Toggle dasboard cards"
+  >
+    ☰
+  </button>
 
-          <AnimatePresence>
-            {isSearchOpen && searchQuery && (
-              <motion.ul
-                className="search-results"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                {filteredNavigation.map((item) => (
-                  <li key={item.name} onClick={() => handleNavClick(item.href)}>
-                    <strong>{item.name}</strong> – {item.description}
-                  </li>
-                ))}
-              </motion.ul>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div className="header-icons">
-          <FaBell className="notification-icon" />
-          <img
-            src="https://picsum.photos/400/300"
-            alt="Random Placeholder"
-            className="user-avatar"
+  <div className={`dashboard-header-right ${isMobileMenuOpen ? "open" : ""}`}>
+    <div className="search-bar" ref={searchRef}>
+      <FiSearch
+        className="search-icon"
+        onClick={() => setIsSearchOpen(!isSearchOpen)}
+      />
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.input
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            type="text"
+            placeholder="Search sections..."
+            className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-        </div>
-      </div>
-    </header>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isSearchOpen && searchQuery && (
+          <motion.ul
+            className="search-results"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            {filteredNavigation.map((item) => (
+              <li key={item.name} onClick={() => handleNavClick(item.href)}>
+                <strong>{item.name}</strong> – {item.description}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+
+    <div className="header-icons">
+      <FaBell className="notification-icon" />
+      <img
+        src="https://picsum.photos/400/300"
+        alt="Random Placeholder"
+        className="user-avatar"
+      />
+    </div>
+  </div>
+</header>
   );
 };
 

@@ -144,3 +144,49 @@
   cursor: pointer;
   margin-left: 8px;
 }
+/* Responsive layout */
+@media (max-width: 768px) {
+  .right-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 20;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  }
+
+  .right-panel.open {
+    transform: translateX(0);
+  }
+
+  .task-input input,
+  .task-input button {
+    font-size: 0.9rem;
+  }
+
+  .panel-section h3 {
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .right-panel {
+    position: static;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .panel-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .task-input input,
+  .task-input button {
+    font-size: 1rem;
+  }
+}
+
+
+
+

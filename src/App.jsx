@@ -18,7 +18,7 @@ const App = () => {
   const [session, setSession] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [showPanels, setShowPanels] = useState(true); // controls sidebar + right panel
-
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   useEffect(() => {
     const getSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -54,10 +54,12 @@ const App = () => {
   return (
     <div className="app">
       <div className="main-wrapper">
-        {showPanels && <Sidebar />}
+        {showPanels && <Sidebar isMobileMenuOpen={isMobileMenuOpen} />}
         <main className="main-content">
-          <DashboardHeader onTogglePanels={togglePanels} />
-          <DashboardCards />
+          <DashboardHeader 
+            onTogglePanels={togglePanels}
+            onTogglMobileMenu={() => setIsMobileMenuOpen(prev => !prev)} />
+          <DashboardCards isMobileMenuOpen={isMobileMenuOpen} />
           <AddTransactionSection />
           <DashboardAnalytics />
           <DashboardMain />

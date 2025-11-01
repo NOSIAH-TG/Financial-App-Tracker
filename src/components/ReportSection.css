@@ -2,7 +2,8 @@
 .report-section {
   background-color: #fff;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  margin: auto;
+  max-width: 1200px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   
@@ -13,6 +14,9 @@
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
   color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .section-subtitle {
@@ -25,17 +29,28 @@
 .report-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .report-list li {
   margin: 0.5rem 0;
   font-size: 1rem;
   color: #34495e;
+  background-color: #f9f9f9;
+  padding: 0.8rem 1rem;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Highlight income and expense figures */
 .report-list li strong {
   font-weight: 600;
+  margin-top: 0.3rem;
 }
 
 .report-list li:nth-child(1) span,
@@ -47,4 +62,39 @@
 .report-list li:nth-child(2) span {
   color: #FF6600; /* orange for expenses */
   font-weight: bold;
+}
+/* Responsive layout */
+@media (min-width: 600px) {
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .report-list li {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .report-list li span {
+    margin-top: 0;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .report-section {
+    padding: 2rem;
+  }
+
+  .report-list li {
+    font-size: 1.1rem;
+  }
+
+  .report-list li span {
+    font-size: 1.1rem;
+  }
 }

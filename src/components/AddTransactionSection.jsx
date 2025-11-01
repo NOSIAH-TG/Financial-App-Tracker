@@ -283,7 +283,7 @@ const AddTransactionSection = () => {
                 className="toggle-transactions-btn"
                 onClick={() =>
                   setVisibleCount((prev) =>
-                    prev === 3 ? transactions.length : 3
+                    prev === 1 ? transactions.length : 1
                   )
                 }
                 initial={{ opacity:0, y:10 }}
@@ -291,7 +291,7 @@ const AddTransactionSection = () => {
                 exit={{ opacity:0, y:-10}}
                 transition={{ duration: 0.4}}
               >
-                {visibleCount === 3 ? "Show All" : "Show Less"}
+                {visibleCount === 1 ? "Show All" : "Show Less"}
               </motion.button>
             )}
           </>

@@ -2,19 +2,24 @@
   "name": "financial-app-tracker",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://nosiah-tg.github.io/Financial-App-Tracker",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.74.0",
+    "bootstrap": "^5.3.8",
     "chart.js": "^4.5.0",
     "framer-motion": "^12.23.24",
+    "gh-pages": "^6.3.0",
     "react": "^19.1.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.1",

@@ -5,7 +5,9 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.project-toggle-btn {
+/* Toggle Button */
+.project-toggle-btn,
+.project-save-btn {
   background-color: #130EAF;
   color: white;
   padding: 0.6rem 1.2rem;
@@ -13,6 +15,10 @@
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-toggle-btn {
   margin-bottom: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -22,6 +28,11 @@
   transform: scale(1.05);
 }
 
+.project-save-btn:hover {
+  background-color: #1976d2;
+}
+
+/* Form Layout */
 .project-form-wrapper {
   margin-bottom: 2rem;
 }
@@ -56,21 +67,7 @@
   min-height: 80px;
 }
 
-.project-save-btn {
-  background-color: #130EAF;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.project-save-btn:hover {
-  background-color: #1976d2;
-}
-
+/* Project List */
 .project-list {
   margin-top: 2rem;
 }
@@ -87,6 +84,7 @@
   font-style: italic;
 }
 
+/* Project Card */
 .project-card {
   background-color: white;
   border: 1px solid #ddd;
@@ -122,32 +120,32 @@
   color: #130EAF;
 }
 
+/* Actions */
 .project-actions {
   display: flex;
   gap: 0.5rem;
 }
 
-.project-edit-btn{
+.project-edit-btn,
+.project-delete-btn {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: #130EAF;
   transition: transform 0.2s ease;
 }
 
-.project-delete-btn 
-{
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #FF6600;
-  transition: transform 0.2s ease;
+.project-edit-btn {
+  color: #130EAF;
 }
+
 .project-edit-btn:hover {
   color: #1976d2;
   transform: scale(1.1);
+}
+
+.project-delete-btn {
+  color: #FF6600;
 }
 
 .project-delete-btn:hover {
@@ -155,6 +153,7 @@
   transform: scale(1.1);
 }
 
+/* Mobile */
 @media (max-width: 600px) {
   .project-form {
     gap: 0.6rem;
@@ -179,4 +178,52 @@
   .project-actions {
     margin-top: 0.5rem;
   }
-} 
+}
+
+/* Tablet/Desktop */
+@media (min-width: 600px) {
+  .project-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .project-form textarea,
+  .project-save-btn {
+    grid-column: span 2;
+  }
+
+  .project-card {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-info {
+    flex: 2;
+  }
+
+  .project-amount {
+    flex: 1;
+    text-align: right;
+  }
+
+  .project-actions {
+    flex: 1;
+    justify-content: flex-end;
+  }
+}
+
+/* Large screens */
+@media (min-width: 900px) {
+  .project-form-wrapper {
+    padding: 2rem;
+  }
+
+  .project-form input,
+  .project-form select,
+  .project-form textarea,
+  .project-save-btn {
+    font-size: 1.1rem;
+  }
+}
