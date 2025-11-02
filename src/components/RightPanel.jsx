@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./RightPanel.css";
-import { FaClipboardList, FaCalendarAlt, FaUserCircle, FaTrash } from "react-icons/fa";
+import { FaClipboardList, FaCalendarAlt, FaUserCircle, FaTrash, FaGithub } from "react-icons/fa";
 
 const RightPanel = () => {
   const initialTasks = [
@@ -37,11 +37,31 @@ const RightPanel = () => {
   };
 
   const contributors = [
-    { id: 1, name: "Marvel 🦋", role: "UI Designer" },
-    { id: 2, name: "Raven", role: "Backend" },
-    { id: 3, name: "Gilbert 🧑🏽‍💻", role: "Backend" },
-    { id: 4, name: "Daisy", role: "Dev Ops" },
-  ];
+  {
+    id: 1,
+    name: "Marvel 🦋",
+    role: "UI Designer",
+    github: "https://github.com/MarvelMafong",
+  },
+  {
+    id: 2,
+    name: "Raven 🧑🏽‍💻",
+    role: "Backend",
+    github: "https://github.com/Ravennelli",
+  },
+  {
+    id: 3,
+    name: "Gilbert 🧑🏽‍💻",
+    role: "Backend",
+    github: "https://github.com/NOSIAH-TG",
+  },
+  {
+    id: 4,
+    name: "Daisy",
+    role: "Dev Ops Engineer",
+    github: "https://github.com/daizyleticianyuyubunridzem",
+  },
+];
 
   return (
     <aside className="right-panel">
@@ -106,12 +126,23 @@ const RightPanel = () => {
           <FaUserCircle className="icon" /> Top Contributors
         </h3>
         <ul className="contributors">
-          {contributors.map((user) => (
+            {contributors.map((user) => (
             <li key={user.id}>
               <FaUserCircle className="avatar" />
               <div>
                 <strong>{user.name}</strong>
                 <p>{user.role}</p>
+                {user.github && (
+                  <a
+                    href={user.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="github-link"
+                    aria-label={`GitHub profile of ${user.name}`}
+                  >
+                    <FaGithub />
+                  </a>
+                )}
               </div>
             </li>
           ))}

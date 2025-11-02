@@ -191,6 +191,7 @@ const AddTransactionSection = () => {
                 type="text"
                 name="category"
                 placeholder="Category"
+                aria-label="category"
                 value={form.category}
                 onChange={handleChange}
               >
@@ -225,6 +226,7 @@ const AddTransactionSection = () => {
           id="category-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
+          aria-label="category"
         >
           <option value="all">All</option>
           <option value="health">Health</option>
@@ -263,12 +265,13 @@ const AddTransactionSection = () => {
                     {t.type === "expense" ? "-" : "+"}₣{t.amount}
                   </div>
                   <div className="actions">
-                    <button className="edit-btn" onClick={() => handleEdit(t)}>
+                    <button className="edit-btn" onClick={() => handleEdit(t)} aria-label="Edit Transaction">
                       <FaEdit />
                     </button>
                     <button
                       className="delete-btn"
                       onClick={() => handleDelete(t.id)}
+                      aria-label="Delete Transaction"
                     >
                       <FaTrash />
                     </button>

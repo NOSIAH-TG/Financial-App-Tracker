@@ -60,7 +60,7 @@ const TrackSection = () => {
 
   return (
     <section className="track-section">
-      <h3 className="section-title">Spending Insights < FaListAlt /></h3>
+      <h3 className="section-title">Spending Insights < FaListAlt className="icon" /></h3>
       <p className="section-subtitle">Monitor habits and recurring patterns.</p>
       <ul className="track-list">
         <li><strong>Top Category:</strong> {topCategory}</li>
