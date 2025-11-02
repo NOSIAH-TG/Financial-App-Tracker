@@ -57,7 +57,7 @@ const RightPanel = () => {
   },
   {
     id: 4,
-    name: "Daisy",
+    name: "Daisy 🦋",
     role: "Dev Ops Engineer",
     github: "https://github.com/daizyleticianyuyubunridzem",
   },
