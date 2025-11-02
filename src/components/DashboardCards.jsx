@@ -1,13 +1,10 @@
-// Marvel. This is static for display and UI purposes.. please dont edit.
-// Description: Displays the summary statistic cards on the dashboard overview.
-
 import React from "react";
 import "./DashboardCards.css";
 import { FaCheckCircle, FaSpinner, FaClock, FaFolderOpen } from "react-icons/fa";
 
-const DashboardCards = () => {
+const DashboardCards = ({ isMobileCardsOpen }) => {
   return (
-    <section className="dashboard-cards">
+    <section className={`dashboard-cards ${isMobileCardsOpen ? "dropdown" : ""}`}>
       {/* ✅ Completed Tasks */}
       <div className="card completed">
         <div className="card-icon">

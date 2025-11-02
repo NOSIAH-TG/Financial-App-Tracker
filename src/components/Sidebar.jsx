@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
 import {
   FaChartPie,
@@ -11,6 +11,8 @@ import {
 import { supabase } from "../supabaseClient";
 
 const Sidebar = ({ onLogout }) => {
+  const [activeLink, setActiveLink] = useState("dashboard");
+
   const handleLogout = async (e) => {
     e.preventDefault();
     await supabase.auth.signOut();
@@ -27,25 +29,38 @@ const Sidebar = ({ onLogout }) => {
         <nav className="navLinks">
           <a
             href="#dashboard"
-            className="link active"
+            className={`link ${activeLink === "dashboard" ? "active" : ""}`}
             onClick={(e) => {
               e.preventDefault();
+              setActiveLink("dashboard");
               window.location.reload();
             }}
           >
             <FaChartPie className="icon" />
             <span>Dashboard</span>
           </a>
-          <a href="#track" className="link">
+          <a
+            href="#track"
+            className={`link ${activeLink === "track" ? "active" : ""}`}
+            onClick={() => setActiveLink("track")}
+          >
             <FaListAlt className="icon" />
             <span>Track</span>
           </a>
-          <a href="#projects" className="link">
+          <a
+            href="#projects"
+            className={`link ${activeLink === "projects" ? "active" : ""}`}
+            onClick={() => setActiveLink("projects")}
+          >
             <FaProjectDiagram className="icon" />
             <span>Projects</span>
-            <span className="badge">2</span>
+            
           </a>
-          <a href="#reports" className="link">
+          <a
+            href="#reports"
+            className={`link ${activeLink === "reports" ? "active" : ""}`}
+            onClick={() => setActiveLink("reports")}
+          >
             <FaChartBar className="icon" />
             <span>Reports</span>
           </a>
@@ -57,7 +72,7 @@ const Sidebar = ({ onLogout }) => {
           <FaSignOutAlt className="icon" />
           <span>Logout</span>
         </button>
-        <button className="link" onClick={() => alert("Settings clicked!")}>
+        <button className="link" onClick={() => window.location.href = "/404"}>
           <FaCog className="icon" />
           <span>Settings</span>
         </button>

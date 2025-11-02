@@ -53,14 +53,6 @@ const TrackSection = () => {
         { amount: 0 }
       );
       setLargestIncome(largestInc);
-
-      // Tags from notes
-      const tagSet = new Set();
-      data.forEach((t) => {
-        const matches = t.note?.match(/#\w+/g);
-        matches?.forEach((tag) => tagSet.add(tag));
-      });
-      setTags([...tagSet]);
     };
 
     fetchTrackData();
@@ -68,7 +60,7 @@ const TrackSection = () => {
 
   return (
     <section className="track-section">
-      <h3 className="section-title">Spending Insights < FaListAlt /></h3>
+      <h3 className="section-title">Spending Insights < FaListAlt className="icon" /></h3>
       <p className="section-subtitle">Monitor habits and recurring patterns.</p>
       <ul className="track-list">
         <li><strong>Top Category:</strong> {topCategory}</li>

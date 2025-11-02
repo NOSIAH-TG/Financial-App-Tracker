@@ -191,6 +191,7 @@ const AddTransactionSection = () => {
                 type="text"
                 name="category"
                 placeholder="Category"
+                aria-label="category"
                 value={form.category}
                 onChange={handleChange}
               >
@@ -225,6 +226,7 @@ const AddTransactionSection = () => {
           id="category-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
+          aria-label="category"
         >
           <option value="all">All</option>
           <option value="health">Health</option>
@@ -263,12 +265,13 @@ const AddTransactionSection = () => {
                     {t.type === "expense" ? "-" : "+"}₣{t.amount}
                   </div>
                   <div className="actions">
-                    <button className="edit-btn" onClick={() => handleEdit(t)}>
+                    <button className="edit-btn" onClick={() => handleEdit(t)} aria-label="Edit Transaction">
                       <FaEdit />
                     </button>
                     <button
                       className="delete-btn"
                       onClick={() => handleDelete(t.id)}
+                      aria-label="Delete Transaction"
                     >
                       <FaTrash />
                     </button>
@@ -283,7 +286,7 @@ const AddTransactionSection = () => {
                 className="toggle-transactions-btn"
                 onClick={() =>
                   setVisibleCount((prev) =>
-                    prev === 3 ? transactions.length : 3
+                    prev === 1 ? transactions.length : 1
                   )
                 }
                 initial={{ opacity:0, y:10 }}
@@ -291,7 +294,7 @@ const AddTransactionSection = () => {
                 exit={{ opacity:0, y:-10}}
                 transition={{ duration: 0.4}}
               >
-                {visibleCount === 3 ? "Show All" : "Show Less"}
+                {visibleCount === 1 ? "Show All" : "Show Less"}
               </motion.button>
             )}
           </>

@@ -114,3 +114,48 @@
   color: #ff6600;
   font-weight: 600;
 }
+/* Responsive layout */
+@media (min-width: 600px) {
+  .balance-stats {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .transaction-item {
+    font-size: 1.1rem;
+  }
+
+  .chart-section {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .dashboard-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .balance-section {
+    grid-column: span 2;
+  }
+
+  .transactions-section {
+    grid-column: span 2;
+  }
+
+  .chart-section {
+    grid-column: span 1;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .balance-amount {
+    font-size: 2.5rem;
+  }
+}
+
+/* Responsive layout for smaller screens */
